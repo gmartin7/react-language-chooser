@@ -1,0 +1,19 @@
+version: '3'
+services:
+  node:
+    build: .
+    restart: always
+    ports:
+      - 3000
+    environment:
+      - NODE_ENV=production
+      - VIRTUAL_HOST=example.com
+      - LETSENCRYPT_HOST=example.com
+      - LETSENCRYPT_EMAIL=you@example.com
+    volumes:
+      - .:/home/node
+      - /home/node/node_modules
+networks:
+  default:
+    external:
+      name: nginx-proxy

@@ -1,0 +1,53 @@
+body {
+  padding: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+input.search {
+  margin-bottom: .5em;
+}
+
+.language-list, .language-table {
+  width: 100%;
+}
+
+@media only screen and (min-width: 48em) {
+  .language-table {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.lang {
+  display: grid;
+  grid-template-columns: 2fr 1fr 5fr 2fr;
+  grid-column-gap: 1em;
+}
+
+.language-list header {
+  color: white;
+  background-color: black;
+}
+
+.lang-name {
+  grid-column: 1;
+}
+
+.lang-code {
+  grid-column: 2;
+}
+
+.lang-country {
+  grid-column: 3;
+}
+
+.lang-other {
+  grid-column: 4;
+}
+
+
