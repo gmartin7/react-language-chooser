@@ -4,6 +4,7 @@ const app = require('../../app');
 const Browser = require('zombie');
 const PORT = process.env.NODE_ENV === 'production' ? 3000 : 3001; 
 const LANGUAGES = require('../../views/data/languages');
+
 Browser.localhost('example.com', PORT);
       
 describe('client', () => {
@@ -63,20 +64,50 @@ describe('client', () => {
 //      });
 //    });
 //
-//    it('closes the list when clicked', (done) => {
-//      browser.assert.element('.language-list');
-//      browser.click('.language-list li', (err) => {
-//        if (err) done.fail(err);
-//        browser.assert.elements('.language-list', 0);
-//        done();
-//      });
-//    });
 
-//    it('has a language chooser button', () => {
-//      console.log(browser.html());
-//      browser.assert.element('button.chooser-button');
-//      browser.assert.text('button.chooser-button', 'Change Language');
-//    });
+    it('closes the list when chooser button is clicked', (done) => {
+      browser.assert.element('.language-list');
+      browser.click('.chooser-button', (err) => {
+        browser.assert.elements('.language-list', 0);
+        done();
+      });
+    });
+
+    describe('language search', () => {
+
+      it('gives focus to search input', () => {
+        browser.assert.hasFocus('input[name=search]')
+      });
+
+      it('only shows matching language codes', (done) => {
+        browser.fill('search', 'lo');
+        browser.fire('input[name=search]', 'change', () => {
+          let input = browser.querySelector('input[name=search]')
+
+          browser.assert.elements('.language-list section.language-table div', 1);
+          done();
+        });
+      });
+
+      it('only shows matching countries', (done) => {
+        browser.fill('search', 'China');
+        browser.fire('input[name=search]', 'change', () => {
+          let input = browser.querySelector('input[name=search]')
+
+          browser.assert.elements('.language-list section.language-table div', 4);
+          done();
+        });
+      });
+
+      it('is case-insensitive in its searches', (done) => {
+        browser.fill('search', 'THAILAND');
+        browser.fire('input[name=search]', 'change', () => {
+          let input = browser.querySelector('input[name=search]')
+
+          browser.assert.elements('.language-list section.language-table div', 3);
+          done();
+        });
+      });
+    });
   });
-
 });
