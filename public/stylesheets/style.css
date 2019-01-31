@@ -143,3 +143,7 @@ input.search {
   width: 178px !important;
 }
 
+.selected {
+  background-color: green;
+  color: white;
+}
