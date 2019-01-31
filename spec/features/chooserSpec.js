@@ -18,6 +18,7 @@ describe('client', () => {
       document = doc;
       document.addEventListener("DOMContentLoaded", (event) => {
         browser.click('.chooser-button', (err) => {
+          if (err) return done.fail(err);
           done();
         });
       });
@@ -151,5 +152,103 @@ describe('client', () => {
         });
       });
     });
+  });
+
+  describe('describe language selection', () => {
+    it('highlights the selected language', (done) => {
+      browser.assert.hasNoClass('section.language-table div.lang:nth-of-type(2)', 'selected');
+      browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
+        if (err) return done.fail(err);
+        browser.assert.hasClass('section.language-table div.lang:nth-of-type(2)', 'selected');
+        done();
+      });
+    });
+
+    it('removes highlight if a language is clicked twice', (done) => {
+      browser.assert.hasNoClass('section.language-table div.lang:nth-of-type(2)', 'selected');
+      browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
+        if (err) return done.fail(err);
+        browser.assert.hasClass('section.language-table div.lang:nth-of-type(2)', 'selected');
+        browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
+          if (err) return done.fail(err);
+          browser.assert.hasNoClass('section.language-table div.lang:nth-of-type(2)', 'selected');
+          done();
+        });
+      });
+    });
+  });
+
+  describe('add button', () => {
+    it('is disabled if no languages are selected', () => {
+      browser.assert.attribute('button.add-button', 'disabled', '');
+    });
+
+    it('is enabled if a language is selected', (done) => {
+      browser.assert.attribute('button.add-button', 'disabled', '');
+      browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
+        if (err) return done.fail(err);
+        browser.assert.attribute('button.add-button', 'disabled', null);
+        done();
+      });
+    });
+
+    it('is enabled if multiple languages are selected', (done) => {
+      browser.assert.attribute('button.add-button', 'disabled', '');
+      browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
+        if (err) return done.fail(err);
+        browser.click('section.language-table div.lang:nth-of-type(3)', (err) => {
+          if (err) return done.fail(err);
+          browser.assert.attribute('button.add-button', 'disabled', null);
+          done();
+        });
+      });
+    });
+
+    it('closes the modal when clicked', (done) => {
+      browser.assert.element('.language-list');
+      browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
+        if (err) return done.fail(err);
+        browser.click('.add-button', (err) => {
+          if (err) return done.fail(err);
+          browser.assert.elements('.language-list', 0);
+          done();
+        });
+      });
+    });
+
+    it('does not close the modal when clicked if disabled', (done) => {
+      browser.assert.attribute('button.add-button', 'disabled', '');
+      browser.assert.element('.language-list');
+      browser.click('.add-button', (err) => {
+        if (err) return done.fail(err);
+        browser.assert.element('.language-list');
+        done();
+      });
+    });
+
+    it('persists highlighting when a language is already selected', (done) => {
+      browser.assert.element('.language-list');
+      browser.assert.hasNoClass('section.language-table div.lang:nth-of-type(2)', 'selected');
+      browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
+        if (err) return done.fail(err);
+        browser.click('.add-button', (err) => {
+          if (err) return done.fail(err);
+          browser.assert.elements('.language-list', 0);
+          browser.click('.chooser-button', (err) => {
+            if (err) return done.fail(err);
+
+            browser.assert.hasClass('section.language-table div.lang:nth-of-type(2)', 'selected');
+            done();
+          });
+        });
+      });
+    });
+
+    it('displays the selected languages on the landing page', (done) => {
+      done.fail();
+    });
+  });
+
+  describe('removing languages', () => {
   });
 });
