@@ -45,7 +45,7 @@ app.use(function(err, req, res, next) {
 
 let port = process.env.NODE_ENV === 'production' ? 3000 : 3001;
 app.listen(port, '0.0.0.0', () => {
-  console.log('archiver listening ' + port + '!');
+  console.log('react-language-chooser listening ' + port + '!');
 });
 
 module.exports = app;
