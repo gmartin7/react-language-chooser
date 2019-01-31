@@ -7,14 +7,17 @@
     <link rel='stylesheet' type="text/css" href='/stylesheets/style.css' />
   </head>
   <body>
-    <h3>YOU can get me on board with SIL and Wycliffe for as little as $5/month!</h3>
-    <% if (process.env.NODE_ENV=== 'production') { %>
-      <a href="https://www.patreon.com/bePatron?u=16503382" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
-    <% } %>
-    <nav id="page">
+    <div class="center">
+      <h3>YOU can get me on board with SIL and Wycliffe for as little as $5/month!</h3>
+      <% if (process.env.NODE_ENV=== 'production') { %>
+        <a href="https://www.patreon.com/bePatron?u=16503382"
+           data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+        <script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
+      <% } %>
       <h1>React Language Picker Component</h1>
-    </nav>
-    <main id="root"></main>
+      <h2>&#11015;</h2>
+      <main id="root"></main>
+    </div>
     <script src="/javascripts/bundle.js"></script>
   </body>
 </html>
