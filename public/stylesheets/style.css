@@ -1,5 +1,6 @@
 body {
   padding: 0;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -11,27 +12,52 @@ input.search {
   margin-bottom: .5em;
 }
 
-.language-list, .language-table {
+.language-list {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+
+  top: 0;
+  left: 0;
+
   width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.2);
+}
+
+.language-table {
+  width: 100%;
+  background-color: white;
+}
+
+.language-table h1 {
+  font-size: 1.25em;
+  margin-top: 0;
 }
 
 @media only screen and (min-width: 48em) {
+  .language-list {
+    padding: 1em;
+  }
+
   .language-table {
+    padding: 1em;
     width: 60%;
     margin-left: auto;
     margin-right: auto;
   }
 }
 
+.language-list header {
+  color: white;
+  background-color: black;
+}
+
 .lang {
   display: grid;
   grid-template-columns: 2fr 1fr 5fr 2fr;
   grid-column-gap: 1em;
-}
-
-.language-list header {
-  color: white;
-  background-color: black;
+  margin-bottom: .25em;
 }
 
 .lang-name {
@@ -50,4 +76,13 @@ input.search {
   grid-column: 4;
 }
 
+.close {
+  font-weight: bold;
+  font-size: 1.25em;
+  text-align: right;
+  margin-right: .25em;
+}
 
+.close span {
+  cursor: pointer;
+}
