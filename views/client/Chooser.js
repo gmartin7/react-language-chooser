@@ -33,7 +33,9 @@ class Chooser extends React.Component {
 
     langs = langs.map((l) => {
       return <Language name={l.name} code={l.code} country={l.country}
-                       otherNames={l.otherNames} key={l.code} select={this.selectLanguage} />;
+                       otherNames={l.otherNames} key={l.code}
+                       selected={this.state.selected.indexOf(l.code) > -1}
+                       select={this.selectLanguage} />;
     });
 
     if (!langs.length) {
@@ -48,12 +50,13 @@ class Chooser extends React.Component {
   }
 
   addLanguages(e) {
-//    e.preventDefault();
-//    this.setState({ visible: !this.state.visible, search: '' });
+    let joined = this.state.added.concat(this.state.selected);
+    this.setState({ added: joined, visible: !this.state.visible, search: '' });
   } 
 
-  selectLanguage(e) {
-
+  selectLanguage(code) {
+    let joined = this.state.selected.concat(code);
+    this.setState({ selected: joined })
   } 
 
   render() {

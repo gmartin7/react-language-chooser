@@ -4,12 +4,13 @@ class Language extends React.Component {
   constructor(props) {
     super(props);
     this.toggleSelected = this.toggleSelected.bind(this);
-    this.state = { selected: false };
+    this.state = { selected: props.selected };
   }
 
-
   toggleSelected() {
-    this.setState({ selected: !this.state.selected });
+    this.setState({ selected: !this.state.selected }, () => {
+      this.props.select(this.props.code);
+    });
   } 
 
   render() {
