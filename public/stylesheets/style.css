@@ -43,6 +43,7 @@ input.search {
   width: 100%;
   background-color: white;
   margin-top: 2em;
+  padding-bottom: 1em;
 }
 
 .language-table h1 {
