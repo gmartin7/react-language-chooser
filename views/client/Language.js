@@ -3,17 +3,18 @@ const React = require('react');
 class Language extends React.Component {
   constructor(props) {
     super(props);
-//    this.toggleLanguages = this.toggleLanguages.bind(this);
-//    this.state = { visible: false };
+    this.toggleSelected = this.toggleSelected.bind(this);
+    this.state = { selected: false };
   }
 
 
-//  toggleLanguages() {
-//    this.setState({ visible: !this.state.visible });
-//  } 
+  toggleSelected() {
+    this.setState({ selected: !this.state.selected });
+  } 
 
   render() {
-    return <div className='lang'>
+    return <div className={`lang ${this.state.selected ? 'selected' : ''}`}
+                onClick={this.toggleSelected}>
              <span className='lang-name'>{this.props.name}</span>
              <span className='lang-code'>{this.props.code}</span>
              <span className='lang-country'>{this.props.country}</span>

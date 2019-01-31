@@ -6,12 +6,18 @@ class Chooser extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.toggleLanguages = this.toggleLanguages.bind(this);
     this.getList = this.getList.bind(this);
     this.search = this.search.bind(this);
+    this.addLanguages = this.addLanguages.bind(this);
+    this.selectLanguage = this.selectLanguage.bind(this);
+
     this.state = {
       visible: false,
-      search: '' 
+      search: '',
+      selected: [],
+      added: [] 
     };
   }
 
@@ -26,7 +32,8 @@ class Chooser extends React.Component {
     });
 
     langs = langs.map((l) => {
-      return <Language name={l.name} code={l.code} country={l.country} otherNames={l.otherNames} key={l.code}/>;
+      return <Language name={l.name} code={l.code} country={l.country}
+                       otherNames={l.otherNames} key={l.code} select={this.selectLanguage} />;
     });
 
     if (!langs.length) {
@@ -39,6 +46,15 @@ class Chooser extends React.Component {
   search(e) {
     this.setState({ search: e.target.value.toLowerCase() });
   }
+
+  addLanguages(e) {
+//    e.preventDefault();
+//    this.setState({ visible: !this.state.visible, search: '' });
+  } 
+
+  selectLanguage(e) {
+
+  } 
 
   render() {
     let languageList;
@@ -59,7 +75,11 @@ class Chooser extends React.Component {
                          </header>
                          {this.getList()}
                          <footer>
-                           <button className='add-button' onClick={this.toggleLanguages}>&#43; Add</button>
+                           <button className='add-button'
+                                   disabled={this.state.selected.length ? false : true}
+                                   onClick={this.addLanguages}>
+                             &#43; Add
+                           </button>
                          </footer>
                        </section>
                      </div>;
