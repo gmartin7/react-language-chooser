@@ -1,6 +1,6 @@
 module.exports = [
   { name: 'Lao', code: 'lo', country: 'Cambodia, Lao People\'s Democratic Republic', otherNames: 'Lao-Kao'},
-  { name: 'Thai', code: 'th', country: 'Cambodia, Tailand', otherNames: 'Thai-Ko'},
+  { name: 'Thai', code: 'th', country: 'Cambodia, Thailand', otherNames: 'Thai-Ko'},
   { name: 'Akeu', code: 'aeu', country: 'China, Lao People\'s Democratic Republic', otherNames: 'Aki, Akui, Akheu'},
   { name: 'Akha', code: 'ahk', country: 'China, Lao People\'s Democratic Republic', otherNames: 'Ahka, Aini, Aka'},
   { name: 'Ban Khor', code: 'bfa', country: 'Thailand', otherNames: 'pasa kidd'},
