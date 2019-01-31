@@ -25,9 +25,15 @@ class Chooser extends React.Component {
       return Object.values(l).join(' ').toLowerCase().search(this.state.search) > -1;
     });
 
-    return langs.map((l) => {
+    langs = langs.map((l) => {
       return <Language name={l.name} code={l.code} country={l.country} otherNames={l.otherNames} key={l.code}/>;
     });
+
+    if (!langs.length) {
+      langs = <div className='no-match'>No match</div>;
+    }
+
+    return langs;
   }
 
   search(e) {

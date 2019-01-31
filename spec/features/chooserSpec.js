@@ -125,5 +125,15 @@ describe('client', () => {
         done();
       });
     });
+
+    it('is displays a message if there are no matches', (done) => {
+      browser.fill('search', 'Klingon');
+      browser.fire('input[name=search]', 'change', () => {
+        let input = browser.querySelector('input[name=search]')
+
+        browser.assert.elements('.language-list section.language-table div.no-match', 1);
+        done();
+      });
+    });
   });
 });
