@@ -12,6 +12,19 @@ input.search {
   margin-bottom: .5em;
 }
 
+.center {
+  text-align: center;
+}
+
+.center h2 {
+  color: red;
+  font-size: 3em;
+}
+
+.center h3 {
+  margin-top: 5em;
+}
+
 .language-list {
   position: fixed;
   padding: 0;
@@ -28,6 +41,7 @@ input.search {
 .language-table {
   width: 100%;
   background-color: white;
+  margin-top: 2em;
 }
 
 .language-table h1 {
@@ -85,4 +99,20 @@ input.search {
 
 .close span {
   cursor: pointer;
+}
+
+.chooser-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.no-match {
+  padding-top: 3em;
+  padding-bottom: 3em;
 }
