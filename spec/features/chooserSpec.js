@@ -24,7 +24,7 @@ describe('client', () => {
     });
 
     browser.visit('/', (err) => {
-      if (err) done.fail(err);
+      if (err) return done.fail(err);
       browser.assert.success();
     });
   });
@@ -60,6 +60,7 @@ describe('client', () => {
     it('closes the list when chooser button is clicked', (done) => {
       browser.assert.element('.language-list');
       browser.click('.chooser-button', (err) => {
+        if (err) return done.fail(err);
         browser.assert.elements('.language-list', 0);
         done();
       });
@@ -68,6 +69,7 @@ describe('client', () => {
     it('closes the list when the gray background is clicked', (done) => {
       browser.assert.element('.language-list');
       browser.click('.language-list', (err) => {
+        if (err) return done.fail(err);
         browser.assert.elements('.language-list', 0);
         done();
       });
@@ -76,6 +78,7 @@ describe('client', () => {
     it('does not close the list when the language table is clicked', (done) => {
       browser.assert.element('.language-list');
       browser.click('.language-table', (err) => {
+        if (err) return done.fail(err);
         browser.assert.elements('.language-list', 1);
         done();
       });
@@ -84,6 +87,7 @@ describe('client', () => {
     it('closes the list when the X is clicked', (done) => {
       browser.assert.element('.language-list');
       browser.click('.close span', (err) => {
+        if (err) return done.fail(err);
         browser.assert.elements('.language-list', 0);
         done();
       });
@@ -99,8 +103,6 @@ describe('client', () => {
     it('only shows matching language codes', (done) => {
       browser.fill('search', 'lo');
       browser.fire('input[name=search]', 'change', () => {
-        let input = browser.querySelector('input[name=search]')
-
         browser.assert.elements('.language-list section.language-table div.lang', 1);
         done();
       });
@@ -109,8 +111,6 @@ describe('client', () => {
     it('only shows matching countries', (done) => {
       browser.fill('search', 'China');
       browser.fire('input[name=search]', 'change', () => {
-        let input = browser.querySelector('input[name=search]')
-
         browser.assert.elements('.language-list section.language-table div.lang', 4);
         done();
       });
@@ -119,8 +119,6 @@ describe('client', () => {
     it('is case-insensitive in its searches', (done) => {
       browser.fill('search', 'THAILAND');
       browser.fire('input[name=search]', 'change', () => {
-        let input = browser.querySelector('input[name=search]')
-
         browser.assert.elements('.language-list section.language-table div.lang', 4);
         done();
       });
@@ -129,10 +127,28 @@ describe('client', () => {
     it('is displays a message if there are no matches', (done) => {
       browser.fill('search', 'Klingon');
       browser.fire('input[name=search]', 'change', () => {
-        let input = browser.querySelector('input[name=search]')
-
         browser.assert.elements('.language-list section.language-table div.no-match', 1);
         done();
+      });
+    });
+
+    it('resets the search when the modal is closed and opened again', (done) => {
+      browser.assert.elements('.language-list section.language-table div.lang', LANGUAGES.length);
+      browser.fill('search', 'Klingon');
+      browser.fire('input[name=search]', 'change', () => {
+
+        browser.assert.elements('.language-list section.language-table div.no-match', 1);
+        browser.assert.elements('.language-list section.language-table div.lang', 0);
+
+        browser.click('.close span', (err) => {
+          if (err) return done.fail(err);
+
+          browser.click('.chooser-button', (err) => {
+            if (err) return done.fail(err);
+            browser.assert.elements('.language-list section.language-table div.lang', LANGUAGES.length);
+            done();
+          });
+        });
       });
     });
   });

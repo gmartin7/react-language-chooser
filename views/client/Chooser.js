@@ -15,9 +15,9 @@ class Chooser extends React.Component {
     };
   }
 
-  toggleLanguages(evt) {
-    evt.preventDefault();
-    this.setState({ visible: !this.state.visible });
+  toggleLanguages(e) {
+    e.preventDefault();
+    this.setState({ visible: !this.state.visible, search: '' });
   } 
 
   getList() {
