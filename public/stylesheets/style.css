@@ -51,6 +51,24 @@ input.search {
   margin-top: 0;
 }
 
+.language-table footer {
+  text-align: right;
+}
+
+.language-table footer .add-button {
+  background-color: gray;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.25em;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: .5em .75em;
+}
+
+
 @media only screen and (min-width: 48em) {
   .language-list {
     padding: 1em;

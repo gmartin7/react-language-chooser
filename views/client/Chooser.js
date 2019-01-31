@@ -58,6 +58,9 @@ class Chooser extends React.Component {
                            <span className='lang-other'>Other Names</span>
                          </header>
                          {this.getList()}
+                         <footer>
+                           <button className='add-button' onClick={this.toggleLanguages}>&#43; Add</button>
+                         </footer>
                        </section>
                      </div>;
     }

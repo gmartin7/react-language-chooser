@@ -44,8 +44,8 @@ describe('client', () => {
       browser.assert.text('.language-list header span:nth-child(2)', 'Code');
       browser.assert.text('.language-list header span:nth-child(3)', 'Country');
       browser.assert.text('.language-list header span:nth-child(4)', 'Other Names');
-      browser.assert.element('.language-list section.language-table');
       browser.assert.elements('.language-list section.language-table div.lang', LANGUAGES.length);
+      browser.assert.element('.language-list section.language-table footer button.add-button');
     });
 
     it('shows a list of languages', () => {
