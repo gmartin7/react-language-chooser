@@ -3,12 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>React Language Picker Component</title>
+    <title>React Language Picker Component - whatdandoes.info</title>
     <link rel='stylesheet' type="text/css" href='/stylesheets/style.css' />
   </head>
   <body>
     <h3>YOU can get me on board with SIL and Wycliffe for as little as $5/month!</h3>
-    <a href="https://www.patreon.com/bePatron?u=16503382" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
+    <% if (process.env.NODE_ENV=== 'production') { %>
+      <a href="https://www.patreon.com/bePatron?u=16503382" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
+    <% } %>
     <nav id="page">
       <h1>React Language Picker Component</h1>
     </nav>
