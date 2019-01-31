@@ -15,7 +15,8 @@ class Chooser extends React.Component {
     };
   }
 
-  toggleLanguages() {
+  toggleLanguages(evt) {
+    evt.preventDefault();
     this.setState({ visible: !this.state.visible });
   } 
 
@@ -37,8 +38,9 @@ class Chooser extends React.Component {
     let languageList;
 
     if (this.state.visible) {
-      languageList = <div className='language-list'>
-                       <section className='language-table'>
+      languageList = <div className='language-list' onClick={this.toggleLanguages}>
+                       <section className='language-table' onClick={(evt) => evt.stopPropagation()}>
+                         <div className='close'><span onClick={this.toggleLanguages}>&times;</span></div>
                          <h1>Select a New Input System Language</h1>
                          <input name='search' className='search'
                                 type='text' placeholder='&#x1F50D;'
