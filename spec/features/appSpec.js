@@ -32,7 +32,7 @@ describe('client', () => {
 
     it('has a language chooser button', () => {
       browser.assert.element('button.chooser-button');
-      browser.assert.text('button.chooser-button', 'Change Language');
+      browser.assert.text('button.chooser-button', 'Add Languages');
     });
 
     it('does not display the chooser dialog', () => {
