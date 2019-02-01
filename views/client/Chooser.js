@@ -76,7 +76,9 @@ class Chooser extends React.Component {
                            <span className='lang-country'>Country</span>
                            <span className='lang-other'>Other Names</span>
                          </header>
-                         {this.getList()}
+                         <section className='scrollable'>
+                           {this.getList()}
+                         </section>
                          <footer>
                            <button className='add-button'
                                    disabled={this.state.selected.length ? false : true}

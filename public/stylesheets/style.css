@@ -46,9 +46,9 @@ input.search {
   padding-bottom: 1em;
 }
 
-.language-table section {
-  overflow: auto;
-  height: 20%;
+.language-table .scrollable {
+  max-height: 50vh;
+  overflow: scroll;
 }
 
 .language-table h1 {
