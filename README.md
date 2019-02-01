@@ -3,7 +3,7 @@ react-language-chooser
 
 React component created at LSDev Conference 2019. 
 
-
+https://whatdandoes.info
 
 # Install
 
