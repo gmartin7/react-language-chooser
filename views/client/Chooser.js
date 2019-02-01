@@ -88,7 +88,7 @@ class Chooser extends React.Component {
                      </div>;
     }
     return <nav className='chooser'>
-             <button className='chooser-button' onClick={this.toggleLanguages}>Change Language</button>
+             <button className='chooser-button' onClick={this.toggleLanguages}>Add Languages</button>
              {languageList}
            </nav>;
   }
