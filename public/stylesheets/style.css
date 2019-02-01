@@ -46,6 +46,11 @@ input.search {
   padding-bottom: 1em;
 }
 
+.language-table section {
+  overflow: auto;
+  height: 20%;
+}
+
 .language-table h1 {
   font-size: 1.25em;
   margin-top: 0;
@@ -56,7 +61,7 @@ input.search {
 }
 
 .language-table footer .add-button {
-  background-color: gray;
+  background-color: green;
   border: none;
   color: white;
   text-align: center;
@@ -68,6 +73,9 @@ input.search {
   padding: .5em .75em;
 }
 
+.language-table footer .add-button:disabled {
+  background-color: gray;
+}
 
 @media only screen and (min-width: 48em) {
   .language-list {
@@ -92,6 +100,11 @@ input.search {
   grid-template-columns: 2fr 1fr 5fr 2fr;
   grid-column-gap: 1em;
   margin-bottom: .25em;
+  cursor: pointer;
+}
+
+.lang:hover:not(.selected):not(header) {
+  background-color: #dedede;
 }
 
 .lang-name {
