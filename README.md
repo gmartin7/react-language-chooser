@@ -1,13 +1,15 @@
-express-react-bdd-template
-==========================
+react-language-chooser
+======================
 
-Template Express/React app with with Jasmine and Zombie BDD testing built in.
+React component created at LSDev Conference 2019. 
+
+
 
 # Install
 
 ```
-git clone https://github.com/RaphaelDeLaGhetto/express-react-bdd-template.git
-cd express-react-bdd-template && npm install
+git clone https://github.com/WhatDanDoes/react-language-chooser.git
+cd react-language-chooser && npm install
 ```
 
 # Development
@@ -22,7 +24,7 @@ In development mode, the server listens on port `3001` (i.e., go to `http://loca
 
 # Tests
 
-`express-react-bdd-template` uses `jasmine` and `zombie` for testing:
+`react-language-chooser` uses `jasmine` and `zombie` for testing:
 
 ```
 npm test
@@ -35,13 +37,13 @@ npm test
 Clone:
 
 ```
-git clone https://github.com/RaphaelDeLaGhetto/express-react-bdd-template.git
+git clone https://github.com/WhatDanDoes/react-language-chooser.git
 ```
 
 In the application directory:
 
 ```
-cd express-react-bdd-template
+cd react-language-chooser
 NODE_ENV=production npm install
 NODE_ENV=production npm run build
 ```
