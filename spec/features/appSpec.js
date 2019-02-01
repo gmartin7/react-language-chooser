@@ -38,9 +38,61 @@ describe('client', () => {
     it('does not display the chooser dialog', () => {
       browser.assert.elements('.language-list', 0);
     });
+  });
 
-    it('does not display the current language', () => {
-      browser.assert.elements('h1.current-language', 0);
+  describe('language chooser button', () => {
+
+    it('displays the selected languages on the landing page', (done) => {
+      browser.assert.elements('.lang', 0);
+      browser.click('.chooser-button', (err) => {
+        if (err) return done.fail(err);
+        browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
+          if (err) return done.fail(err);
+          browser.click('.add-button', (err) => {
+            if (err) return done.fail(err);
+            browser.assert.elements('.lang', 1);
+            done();
+          });
+        });
+      });
+    });
+
+    it('displays multiple selected languages on the landing page', (done) => {
+      browser.assert.elements('.lang', 0);
+      browser.click('.chooser-button', (err) => {
+        if (err) return done.fail(err);
+        browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
+          if (err) return done.fail(err);
+          browser.click('section.language-table div.lang:nth-of-type(3)', (err) => {
+            if (err) return done.fail(err);
+            browser.click('.add-button', (err) => {
+              if (err) return done.fail(err);
+              browser.assert.elements('.lang', 2);
+              done();
+            });
+          });
+        });
+      });
+    });
+
+    it('only displays languages if the Add button was clicked', (done) => { 
+      browser.assert.elements('.lang', 0);
+      browser.click('.chooser-button', (err) => {
+        if (err) return done.fail(err);
+        browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
+          if (err) return done.fail(err);
+          browser.click('section.language-table div.lang:nth-of-type(3)', (err) => {
+            if (err) return done.fail(err);
+            browser.click('.close span', (err) => {
+              if (err) return done.fail(err);
+              browser.assert.elements('.language-list', 0);
+              if (err) return done.fail(err);
+              browser.assert.elements('.lang', 0);
+              done();
+            });
+          });
+        });
+      });
     });
   });
 });

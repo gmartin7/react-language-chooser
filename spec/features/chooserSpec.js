@@ -51,10 +51,10 @@ describe('client', () => {
 
     it('shows a list of languages', () => {
       LANGUAGES.forEach((lang, i) => {
-        browser.assert.text(`section.language-table div.lang:nth-of-type(${i + 2}) .lang-name`, lang.name);
-        browser.assert.text(`section.language-table div.lang:nth-of-type(${i + 2}) .lang-code`, lang.code);
-        browser.assert.text(`section.language-table div.lang:nth-of-type(${i + 2}) .lang-country`, lang.country);
-        browser.assert.text(`section.language-table div.lang:nth-of-type(${i + 2}) .lang-other`, lang.otherNames);
+        browser.assert.text(`.language-table .scrollable div.lang:nth-of-type(${i + 1}) .lang-name`, lang.name);
+        browser.assert.text(`.language-table .scrollable div.lang:nth-of-type(${i + 1}) .lang-code`, lang.code);
+        browser.assert.text(`.language-table .scrollable div.lang:nth-of-type(${i + 1}) .lang-country`, lang.country);
+        browser.assert.text(`.language-table .scrollable div.lang:nth-of-type(${i + 1}) .lang-other`, lang.otherNames);
       });
     });
 
@@ -226,26 +226,24 @@ describe('client', () => {
       });
     });
 
-    it('persists highlighting when a language is already selected', (done) => {
-      browser.assert.element('.language-list');
-      browser.assert.hasNoClass('section.language-table div.lang:nth-of-type(2)', 'selected');
+    it('omits added languages from the language table', (done) => {
+      browser.assert.elements('.language-list section.language-table div.lang', LANGUAGES.length);
       browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
         if (err) return done.fail(err);
-        browser.click('.add-button', (err) => {
+        browser.click('section.language-table div.lang:nth-of-type(3)', (err) => {
           if (err) return done.fail(err);
-          browser.assert.elements('.language-list', 0);
-          browser.click('.chooser-button', (err) => {
+          browser.assert.attribute('button.add-button', 'disabled', null);
+          browser.click('.add-button', (err) => {
             if (err) return done.fail(err);
-
-            browser.assert.hasClass('section.language-table div.lang:nth-of-type(2)', 'selected');
-            done();
+            browser.click('.chooser-button', (err) => {
+              if (err) return done.fail(err);
+              browser.assert.element('.language-list');
+              browser.assert.elements('.language-list section.language-table div.lang', LANGUAGES.length - 2);
+              done();
+            });
           });
         });
       });
-    });
-
-    it('displays the selected languages on the landing page', (done) => {
-      done.fail();
     });
   });
 

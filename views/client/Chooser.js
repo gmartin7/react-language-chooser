@@ -16,8 +16,7 @@ class Chooser extends React.Component {
     this.state = {
       visible: false,
       search: '',
-      selected: [],
-      added: [] 
+      selected: []
     };
   }
 
@@ -28,13 +27,14 @@ class Chooser extends React.Component {
 
   getList() {
     let langs = LANGUAGES.filter((l) => {
-      return Object.values(l).join(' ').toLowerCase().search(this.state.search) > -1;
+      return this.props.selected.indexOf(l.code) < 0 &&
+             Object.values(l).join(' ').toLowerCase().search(this.state.search) > -1;
     });
 
     langs = langs.map((l) => {
       return <Language name={l.name} code={l.code} country={l.country}
                        otherNames={l.otherNames} key={l.code}
-                       selected={this.state.selected.indexOf(l.code) > -1}
+                       selected={this.props.selected.indexOf(l.code) > -1}
                        select={this.selectLanguage} />;
     });
 
@@ -50,13 +50,19 @@ class Chooser extends React.Component {
   }
 
   addLanguages(e) {
-    let joined = this.state.added.concat(this.state.selected);
-    this.setState({ added: joined, visible: !this.state.visible, search: '' });
+    this.props.addLanguages(this.state.selected);
+    this.setState({ selected: [], visible: !this.state.visible, search: '' });
   } 
 
   selectLanguage(code) {
-    let joined = this.state.selected.concat(code);
-    this.setState({ selected: joined })
+    var selected = [...this.state.selected];
+    if (selected.indexOf(code) > -1) {
+      selected.splice(code, 1);
+    }
+    else {
+      selected = this.state.selected.concat(code);
+    }
+    this.setState({ selected: selected });
   } 
 
   render() {

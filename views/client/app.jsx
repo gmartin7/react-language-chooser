@@ -2,26 +2,37 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const doneReact = require('../../lib/doneReact');
 import Chooser from './Chooser';
+import Language from './Language';
+import LANGUAGES from '../data/languages';
 
 class ClientApp extends React.Component {
   constructor(props) {
     super(props);
-    this.changeLanguage = this.changeLanguage.bind(this);
-    this.state = { currentLanguage: null };
+    this.addLanguages = this.addLanguages.bind(this);
+    this.getList = this.getList.bind(this);
+    this.state = { selected: [] };
   }
 
-  changeLanguage(lang) {
-    this.setState({ currentLanguage: lang });
+  addLanguages(langs) {
+    let joined = this.state.selected.concat(langs);
+    this.setState({ selected: joined });
+  }
+
+  getList() {
+    let langs = LANGUAGES.filter(l => this.state.selected.indexOf(l.code) > -1);
+    langs = langs.map((l) => {
+      return <Language name={l.name} code={l.code} country={l.country}
+                       otherNames={l.otherNames} key={l.code}
+                       select={this.selectLanguage} />;
+    });
+
+   return langs;
   }
 
   render() {
-    let currentLanguage;
-    if (this.state.currentLanguage) {
-      currentLanguage = <h1 className='current-language'>{this.state.currentLanguage}</h1>;
-    }
     return <section>
-             <Chooser languageChanged={this.changeLanguage} />
-             {currentLanguage} 
+             <Chooser selected={this.state.selected} addLanguages={this.addLanguages} />
+             {this.getList()}
            </section>;
   }
 }
