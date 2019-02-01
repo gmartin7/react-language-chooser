@@ -16,6 +16,7 @@ module.exports = {
       }
     ]
   },
+  // 2019-2-1 https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a
   plugins: [
     new webpack.DefinePlugin({ // <-- key to reducing React's size
       'process.env': {
