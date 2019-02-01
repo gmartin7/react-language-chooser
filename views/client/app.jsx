@@ -10,6 +10,7 @@ class ClientApp extends React.Component {
     super(props);
     this.addLanguages = this.addLanguages.bind(this);
     this.getList = this.getList.bind(this);
+    this.removeLanguage = this.removeLanguage.bind(this);
     this.state = { selected: [] };
   }
 
@@ -18,12 +19,15 @@ class ClientApp extends React.Component {
     this.setState({ selected: joined });
   }
 
+  removeLanguage(langs) {
+  }
+
   getList() {
     let langs = LANGUAGES.filter(l => this.state.selected.indexOf(l.code) > -1);
     langs = langs.map((l) => {
       return <Language name={l.name} code={l.code} country={l.country}
                        otherNames={l.otherNames} key={l.code}
-                       select={this.selectLanguage} />;
+                       remove={this.removeLanguage} />;
     });
 
    return langs;
@@ -32,7 +36,9 @@ class ClientApp extends React.Component {
   render() {
     return <section>
              <Chooser selected={this.state.selected} addLanguages={this.addLanguages} />
-             {this.getList()}
+             <section className='language-table'>
+               {this.getList()}
+             </section>
            </section>;
   }
 }

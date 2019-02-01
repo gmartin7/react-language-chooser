@@ -9,7 +9,9 @@ class Language extends React.Component {
 
   toggleSelected() {
     this.setState({ selected: !this.state.selected }, () => {
-      this.props.select(this.props.code);
+      if (this.props.select) {
+        this.props.select(this.props.code);
+      }
     });
   } 
 
