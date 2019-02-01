@@ -246,7 +246,4 @@ describe('client', () => {
       });
     });
   });
-
-  describe('removing languages', () => {
-  });
 });

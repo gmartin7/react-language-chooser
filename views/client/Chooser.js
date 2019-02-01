@@ -55,7 +55,7 @@ class Chooser extends React.Component {
   } 
 
   selectLanguage(code) {
-    var selected = [...this.state.selected];
+    let selected = [...this.state.selected];
     if (selected.indexOf(code) > -1) {
       selected.splice(code, 1);
     }

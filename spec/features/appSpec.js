@@ -3,6 +3,7 @@
 const app = require('../../app');  
 const Browser = require('zombie');
 const PORT = process.env.NODE_ENV === 'production' ? 3000 : 3001; 
+const LANGUAGES = require('../../views/data/languages');
 Browser.localhost('example.com', PORT);
       
 describe('client', () => {
@@ -93,6 +94,60 @@ describe('client', () => {
           });
         });
       });
+    });
+  });
+
+  describe('removing languages', () => {
+    beforeEach((done) => {
+      browser.click('.chooser-button', (err) => {
+        if (err) return done.fail(err);
+        browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
+          if (err) return done.fail(err);
+          browser.click('section.language-table div.lang:nth-of-type(3)', (err) => {
+            if (err) return done.fail(err);
+            browser.click('.add-button', (err) => {
+              if (err) return done.fail(err);
+              browser.assert.elements('.lang', 2);
+              done();
+            });
+          });
+        });
+      });
+    });
+
+    it('removes a language from the app list', (done) => {
+      browser.click('div.lang-wrapper:nth-of-type(2)', (err) => {
+        if (err) return done.fail(err);
+        browser.assert.elements('.lang', 1);
+        done();
+      });
+    });
+
+    it('restores the removed language to the chooser list', (done) => {
+      browser.click('.chooser-button', (err) => {
+        if (err) return done.fail(err);
+        browser.assert.elements('.language-list section.language-table div.lang', LANGUAGES.length - 2);
+
+        browser.click('.close span', (err) => {
+          if (err) return done.fail(err);
+
+          browser.click('div.lang-wrapper:nth-of-type(2)', (err) => {
+            if (err) return done.fail(err);
+            browser.assert.elements('.lang', 1);
+
+            browser.click('.chooser-button', (err) => {
+              if (err) return done.fail(err);
+              browser.assert.elements('.language-list section.language-table div.lang', LANGUAGES.length - 1);
+
+              done();
+            });
+          });
+        });
+      });
+    });
+
+    it('removes the correct language when multiple languages have been selected and removes', (done) => { 
+      done.fail();
     });
   });
 });
