@@ -32,7 +32,7 @@ class ClientApp extends React.Component {
       return <div className='lang-wrapper' onClick={(e) => this.removeLanguage(e, l.code)}>
                <Language name={l.name} code={l.code} country={l.country}
                          otherNames={l.otherNames} key={l.code}
-                         onClick={this.removeLanguage} />;
+                         onClick={this.removeLanguage} />
              </div>
     });
     return langs;
