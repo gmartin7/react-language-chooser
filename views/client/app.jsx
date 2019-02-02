@@ -19,17 +19,17 @@ class ClientApp extends React.Component {
     this.setState({ selected: joined });
   }
 
-  removeLanguage(e, index) {
+  removeLanguage(e, code) {
     e.stopPropagation()
     let selected = [...this.state.selected];
-    selected.splice(index, 1);
+    selected.splice(selected.indexOf(code), 1);
     this.setState({ selected: selected });
   }
-
+ 
   getList() {
     let langs = LANGUAGES.filter(l => this.state.selected.indexOf(l.code) > -1);
-    langs = langs.map((l, index) => {
-      return <div className='lang-wrapper' onClick={(e) => this.removeLanguage(e, index)}>
+    langs = langs.map((l) => {
+      return <div className='lang-wrapper' onClick={(e) => this.removeLanguage(e, l.code)}>
                <Language name={l.name} code={l.code} country={l.country}
                          otherNames={l.otherNames} key={l.code}
                          onClick={this.removeLanguage} />;

@@ -101,9 +101,11 @@ describe('client', () => {
     beforeEach((done) => {
       browser.click('.chooser-button', (err) => {
         if (err) return done.fail(err);
+        // Note the reversed order of language selection. This is done to ensure that
+        // the elements you want to remove are the ones actually removed
         browser.click('section.language-table div.lang:nth-of-type(2)', (err) => {
           if (err) return done.fail(err);
-          browser.click('section.language-table div.lang:nth-of-type(3)', (err) => {
+          browser.click('section.language-table div.lang:nth-of-type(1)', (err) => {
             if (err) return done.fail(err);
             browser.click('.add-button', (err) => {
               if (err) return done.fail(err);
@@ -146,8 +148,28 @@ describe('client', () => {
       });
     });
 
-    it('removes the correct language when multiple languages have been selected and removes', (done) => { 
-      done.fail();
+    // Cf. note in test setup
+    //
+    // This is a confusing problem which may not be immediately obvious.
+    // I discovered it by selecting a languages out of order and then removing
+    // them from the landing page interface. It may appear superfluous, but it
+    // is not.
+    it('removes the correct language when multiple languages have been selected out of order', (done) => { 
+      // Add a third language
+
+      browser.assert.text('div.lang-wrapper:nth-of-type(1) .lang-code', LANGUAGES[0].code);
+      browser.assert.text('div.lang-wrapper:nth-of-type(2) .lang-code', LANGUAGES[1].code);
+
+      browser.click('div.lang-wrapper:nth-of-type(2)', (err) => {
+        if (err) return done.fail(err);
+        browser.assert.elements('.lang', 1);
+        browser.assert.text('div.lang-wrapper:nth-of-type(1) .lang-code', LANGUAGES[0].code);
+        browser.click('div.lang-wrapper:nth-of-type(1)', (err) => {
+          if (err) return done.fail(err);
+            browser.assert.elements('.lang', 0);
+            done();
+        });
+      });
     });
   });
 });
