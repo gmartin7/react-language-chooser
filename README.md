@@ -76,5 +76,10 @@ I've never bundled a React component for general consumption
 
 The demo landing page could use a little love. It looks kind of hokey right now: https://demo.whatdandoes.info
 
+### Bug
+
+Selecting and deselecting multiple languages in random order produces unexpected results when the languages are added. Needs a test.
+
+
 ## God's peace
 
