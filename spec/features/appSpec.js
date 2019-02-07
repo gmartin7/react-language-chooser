@@ -157,13 +157,13 @@ describe('client', () => {
     it('removes the correct language when multiple languages have been selected out of order', (done) => { 
       // Add a third language
 
-      browser.assert.text('div.lang-wrapper:nth-of-type(1) .lang-code', LANGUAGES[0].code);
-      browser.assert.text('div.lang-wrapper:nth-of-type(2) .lang-code', LANGUAGES[1].code);
+      browser.assert.text('div.lang-wrapper:nth-of-type(1) .lang-code', LANGUAGES[0].tag);
+      browser.assert.text('div.lang-wrapper:nth-of-type(2) .lang-code', LANGUAGES[1].tag);
 
       browser.click('div.lang-wrapper:nth-of-type(2)', (err) => {
         if (err) return done.fail(err);
         browser.assert.elements('.lang', 1);
-        browser.assert.text('div.lang-wrapper:nth-of-type(1) .lang-code', LANGUAGES[0].code);
+        browser.assert.text('div.lang-wrapper:nth-of-type(1) .lang-code', LANGUAGES[0].tag);
         browser.click('div.lang-wrapper:nth-of-type(1)', (err) => {
           if (err) return done.fail(err);
             browser.assert.elements('.lang', 0);

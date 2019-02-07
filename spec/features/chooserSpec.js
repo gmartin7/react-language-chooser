@@ -4,6 +4,7 @@ const app = require('../../app');
 const Browser = require('zombie');
 const PORT = process.env.NODE_ENV === 'production' ? 3000 : 3001; 
 const LANGUAGES = require('../../views/data/languages');
+const COUNTRIES = require('../../views/data/countries');
 
 Browser.localhost('example.com', PORT);
       
@@ -52,9 +53,9 @@ describe('client', () => {
     it('shows a list of languages', () => {
       LANGUAGES.forEach((lang, i) => {
         browser.assert.text(`.language-table .scrollable div.lang:nth-of-type(${i + 1}) .lang-name`, lang.name);
-        browser.assert.text(`.language-table .scrollable div.lang:nth-of-type(${i + 1}) .lang-code`, lang.code);
-        browser.assert.text(`.language-table .scrollable div.lang:nth-of-type(${i + 1}) .lang-country`, lang.country);
-        browser.assert.text(`.language-table .scrollable div.lang:nth-of-type(${i + 1}) .lang-other`, lang.otherNames);
+        browser.assert.text(`.language-table .scrollable div.lang:nth-of-type(${i + 1}) .lang-code`, lang.tag);
+        browser.assert.text(`.language-table .scrollable div.lang:nth-of-type(${i + 1}) .lang-country`, lang.region);
+        browser.assert.text(`.language-table .scrollable div.lang:nth-of-type(${i + 1}) .lang-other`, lang.names);
       });
     });
 
